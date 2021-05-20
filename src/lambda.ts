@@ -10,6 +10,7 @@ import { NestFactory } from '@nestjs/core';
 import { ExpressAdapter } from '@nestjs/platform-express';
 
 import { AppModule } from './app.module';
+import { Logger } from '@nestjs/common';
 
 // NOTE: If you get ERR_CONTENT_DECODING_FAILED in your browser, this is likely
 // due to a compressed response (e.g. gzip) which has not been handled correctly
@@ -26,6 +27,9 @@ async function bootstrapServer(): Promise<Server> {
     const nestApp = await NestFactory.create(
       AppModule,
       new ExpressAdapter(expressApp),
+      {
+        logger: ['error', 'warn', 'debug', 'verbose'],
+      },
     );
 
     nestApp.use(eventContext());
@@ -33,6 +37,8 @@ async function bootstrapServer(): Promise<Server> {
     await nestApp.init();
 
     cachedServer = createServer(expressApp, undefined, binaryMimeTypes);
+
+    Logger.debug('Running API Gateway Application', 'NestApplication');
   }
   return cachedServer;
 }
