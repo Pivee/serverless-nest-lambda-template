@@ -1,5 +1,5 @@
 service:
- name: nest-serverless-lambda-api-gateway
+ name: api-gateway
 
 plugins:
  - serverless-plugin-typescript
@@ -17,4 +17,4 @@ functions:
    events:
      - http:
          method: any
-         path: /{any+}
+         path: /{proxy+}
