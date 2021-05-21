@@ -1,5 +1,5 @@
 service:
- name: api-gateway
+ name: nest-http-lambda-broilerplate
 
 plugins:
  - serverless-plugin-typescript
