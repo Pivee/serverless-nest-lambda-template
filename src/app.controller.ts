@@ -1,26 +1,17 @@
-import { Controller, Get, Param, Query } from '@nestjs/common';
-import { AppService } from './app.service';
+import { Controller, Get, Logger, Req } from '@nestjs/common';
+import { LambdaRequest } from './aws';
 
-@Controller('api')
+@Controller()
 export class AppController {
-  constructor(private readonly appService: AppService) {}
-
   @Get()
-  getHello(): string {
-    return this.appService.getHello();
-  }
+  getEventAndContext(@Req() request: LambdaRequest): any {
+    const ec = {
+      event: request?.apiGateway?.event,
+      context: request?.apiGateway?.context,
+    };
 
-  @Get(':name')
-  getHelloWithName(@Param('name') name: string): string {
-    return this.appService.getHello(name);
-  }
+    Logger.debug(ec, 'AppController');
 
-  @Get(':name/:age')
-  getHelloWithNameAndAge(
-    @Param('name') name: string,
-    @Param('age') age: string,
-    @Query() query: any,
-  ): string {
-    return this.appService.getHello(name, age, query);
+    return ec;
   }
 }
