@@ -7,7 +7,7 @@ async function bootstrap() {
     logger: ['error', 'warn', 'debug', 'verbose'],
   });
   await app.listen(3000, () => {
-    Logger.debug('API Gateway Application started', 'NestApplication');
+    Logger.debug('HTTP Application started', 'NestApplication');
   });
 }
 bootstrap();

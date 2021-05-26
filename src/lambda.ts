@@ -38,7 +38,7 @@ async function bootstrapServer(): Promise<Server> {
 
     cachedServer = createServer(expressApp, undefined, binaryMimeTypes);
 
-    Logger.debug('Running API Gateway Application', 'NestApplication');
+    Logger.debug('Running Lambda', 'NestApplication');
   }
   return cachedServer;
 }
