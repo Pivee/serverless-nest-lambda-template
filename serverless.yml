@@ -5,6 +5,9 @@ plugins:
   - serverless-plugin-optimize
   - serverless-offline
 
+package:
+  individually: true
+
 provider:
   name: aws
   runtime: nodejs14.x
